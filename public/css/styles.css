@@ -51,12 +51,24 @@ body {
     height: 100vh;
 }
 
-.login-form-content {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
+.sign-up-form {
+    display: none;
+    align-items: center;
     justify-content: center;
-    min-width: 90%;
+    height: 100vh;
+    flex: 1;
+    height: 100vh;
+}
+
+.login-form-content, 
+.sign-up-form-content {
+    width: 70%;
+}
+
+.login-form h3,
+.sign-up-form h3 {
+    margin-top: 50px;
+    align-self: flex-start;
 }
 
 .login-form-content img {
@@ -64,14 +76,16 @@ body {
     margin-bottom: 35px;
 }
 
-.login-form-content a {
+.login-form-content a, 
+.sign-up-form-content a{
     align-self: flex-end;
     text-decoration: none;
-    color: #2b2b2b;
+    color: #0B9DCA;
     margin-bottom: 25px;
 }
 
-a:hover {
+.login-form-content a:hover, 
+.sign-up-form-content a:hover{
     color: #00B7BC;
 
 }
@@ -92,7 +106,7 @@ form input {
 }
 
 form button {
-    width: 100%;
+    width: 104%;
     padding: 20px 0;
     margin-bottom: 10px;
     border: solid 1px #cccccc;
@@ -158,7 +172,8 @@ form button:hover {
     justify-content: center;
 
 }
-.login-form-subscribe a {
+.login-form-subscribe a, 
+.sign-up-form-subscribe a {
     color: #0B9DCA;
 }
 
