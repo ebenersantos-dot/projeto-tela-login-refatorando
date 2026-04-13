@@ -1,6 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
     const signUpLink = document.querySelector('.login-form-subscribe a');
     const loginLink = document.querySelector('.sign-up-form a');
+    const loginForm = document.querySelector('#login');
+    const signUpForm = document.querySelector('#sign-up');
+    const loginErrorMessage = document.querySelector('#login-error-message');
+    const signUpErrorMessage = document.querySelector('#sign-up-error-message');
 
     const showFormSignUp = () => {
         document.querySelector('.login-form').style.display = "none";
@@ -30,5 +34,83 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault();
         showFormLogin();
         
+    });
+
+    loginForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const emailInput = this.querySelector('#login input[name="email"]');
+        const passwordInput = this.querySelector('#login input[name="password"]');
+        let errors = [];
+
+        if (passwordInput.value.trim().length < 8) {
+            passwordInput.classList.add("error");
+            errors.push("Senha deve conter pelo menos 8 caracteres.");
+        } else {
+            passwordInput.classList.remove("error");
+        }
+
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if(!emailRegex.test(emailInput.value.trim())) {
+            emailInput.classList.add("error");
+            errors.push("Email inválido.");
+        } else {
+            emailInput.classList.remove("error");
+        }
+
+        if (errors.length > 0) {
+            loginErrorMessage.style.display = "block";
+            loginErrorMessage.innerText = errors.join("\n");
+        } else {
+            loginErrorMessage.style.display = "none";
+            loginErrorMessage.innerText = "";
+        }
+    });
+
+    signUpForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const nameInput = this.querySelector('input[name="name"]');
+        const emailInput = this.querySelector('input[name="email"]');
+        const passwordInput = this.querySelector('input[name="password"]');
+        const rePasswordInput = this.querySelector('input[name="re-password"]');
+
+        let errors = [];
+
+            if(nameInput.value.trim() === "") {
+                nameInput.classList.add("error");
+            errors.push("Preencha o nome.");
+        } else {
+            nameInput.classList.remove("error");
+            }
+
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if(!emailRegex.test(emailInput.value.trim())) {
+            emailInput.classList.add("error");
+            errors.push("Email inválido.");
+        } else {
+            emailInput.classList.remove("error");
+        }
+
+         if (passwordInput.value.trim().length < 8) {
+            passwordInput.classList.add("error");
+            errors.push("Senha deve conter pelo menos 8 caracteres.");
+        } else {
+            passwordInput.classList.remove("error");
+        }
+
+            if(passwordInput.value !== rePasswordInput.value) {
+                rePasswordInput.classList.add("error");
+                errors.push("As senhas não conferem")
+            } else {
+                rePasswordInput.classList.remove("error");
+            }
+
+        if (errors.length > 0) {
+            signUpErrorMessage.style.display = "block";
+            signUpErrorMessage.innerText = errors.join("\n");
+        } else {
+            signUpErrorMessage.style.display = "none";
+            signUpErrorMessage.innerText = "";
+        }
     });
 });

@@ -194,13 +194,26 @@ form button:hover {
     animation: slide 90s linear alternate-reverse infinite;
 }
 
-@media screen and (max-width: 768px) {
+.error {
+    border-color: red !important;
+}
+
+@media only screen and (max-width: 768px) {
     .login-container{
         flex-direction: column;
     }
 
+    .login-form {
+        flex: 3;
+    }
+
     .login-text {
         flex: 1;
+    }
+
+    .login-form-content,
+    .sign-up-form-content {
+        width: 90%;
     }
 
     .login-text-content h2 {
@@ -211,7 +224,5 @@ form button:hover {
         font-size: 1rem;
     }
 
-    .login-form {
-        flex: 4;
-    }
+    
 }
