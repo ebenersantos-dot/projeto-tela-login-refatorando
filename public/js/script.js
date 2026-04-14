@@ -38,8 +38,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     loginForm.addEventListener('submit', function (event) {
         event.preventDefault();
-        const emailInput = this.querySelector('#login input[name="email"]');
-        const passwordInput = this.querySelector('#login input[name="password"]');
+        const emailInput = this.querySelector('input[name="email"]');
+        const passwordInput = this.querySelector('input[name="password"]');
         let errors = [];
 
         if (passwordInput.value.trim().length < 8) {
@@ -111,6 +111,30 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             signUpErrorMessage.style.display = "none";
             signUpErrorMessage.innerText = "";
+
+                const userData = {
+                    name: nameInput.value.trim(),
+                    email: emailInput.value.trim(),
+                    password: passwordInput.value.trim(),
+                };
+
+                fetch("http://localhost:4000/users", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(userData),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log("Success:", data);
+                        alert("Cadastro realizado com sucesso!"),
+                            signUpForm.reset();
+                            showFormLogin();
+                    })
+                    .catch((Errors) => {
+                        console.error("Error:", Errors);
+                    });
         }
     });
 });
